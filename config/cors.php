@@ -21,7 +21,7 @@ return [
 
     'allowed_origins' => ['*'],
 
-    'allowed_origins_patterns' => [],
+    'allowed_origins' => ['http://hands-on-exam-bucket.s3-website-ap-southeast-1.amazonaws.com'],
 
     'allowed_headers' => ['*'],
 

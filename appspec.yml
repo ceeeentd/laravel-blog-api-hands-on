@@ -1,0 +1,44 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /var/www/laravel-blog-api-hands-on
+    overwrite: true
+
+permissions:
+  - object: /var/www/laravel-blog-api-hands-on
+    owner: ubuntu
+    group: www-data
+    mode: 775
+    type:
+      - directory
+  - object: /var/www/laravel-blog-api-hands-on
+    owner: ubuntu
+    group: www-data
+    mode: 664
+    type:
+      - file
+
+hooks:
+  BeforeInstall:
+    - location: scripts/stop_apache.sh
+      timeout: 60
+      runas: root
+    - location: scripts/clean_target.sh
+      timeout: 120
+      runas: root
+  AfterInstall:
+    - location: scripts/composer_install.sh
+      timeout: 900
+      runas: ubuntu
+    - location: scripts/set_permissions.sh
+      timeout: 120
+      runas: root
+  ApplicationStart:
+    - location: scripts/restart_apache.sh
+      timeout: 60
+      runas: root
+  ValidateService:
+    - location: scripts/health_check.sh
+      timeout: 60
+      runas: root

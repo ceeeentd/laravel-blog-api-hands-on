@@ -1,0 +1,13 @@
+version: 0.2
+
+phases: {}  
+
+artifacts:
+  files:
+    - '**/*'
+    - 'appspec.yml'
+    - 'scripts/*'
+  exclude-paths:
+    - '.git/*'
+    - 'storage/logs/*'
+    - 'vendor/bin/*'
